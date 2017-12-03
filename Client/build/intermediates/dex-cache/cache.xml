@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_063ed0716d5484c421ccddef0eaca295218e5b80/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_39c0ac15bd1e186eef94cf06843bce71c0179e3f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/7674656b4f92ee805db41bfe1ddac5d0c8c0c225/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cadf4001b10c14795a41f2f99b349ae971dffc97/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/137bca3b2f801acaef073a407855f4902ffdbea9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0b60fc004032f79c19447ef086c3c98e5219687c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/961629392b25958b0b8298be4e45ef9f56717c5c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0b52a36881870c7ade6d40f5588f105b95e2cc79/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/262948c00dcd3a7c13614c00666c574440619f17/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_554ba8230b8309c927cf49643cf574a9c3febf72/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/24d4097aa763a5b48b771992cc1205fd54efa0bb/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_24b8e03a31cc93d59c7ee29c979008d9fae9b7ea/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="02293382f7c5ea089ff49c65855a1dd31fd989e2">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_77bb4c80e7996fd539c903a50ed9a793e4484810/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/ae64f9fa6380435156a2f389158f8bb08781062a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_008c09740fa850ee49b6aba7c209f5318daf3713/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/d04fbe125ec6074db7101213a1e450aca7421a77/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0265e4ca55dfb8b3839d7cdebe1c387d1e9d4f07/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_5dda94c86caabddc6d6d582b43b13c6fa5812d8a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/a3347607c17c24dfccc6452a67b8e34011f56ef2/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_29f36b80f43ebe4b4e2355853094c67a1714bf50/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/a36be653b3b1384c37f2223d467b64b71e7f0ed5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ce43aa8f61620d10b9b75769f242f5936e070206/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/vivian/.android/build-cache/405039294a72130d5998b663bf9bac50baa4003b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="/Users/vivian/Documents/BounRoomAllocator/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3f290b1a1b5133a472612c9634034f2ab3d23ac6/classes.dex" />
+    </item>
+
+</items>

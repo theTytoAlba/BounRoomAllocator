@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Boun Room Allocator</string>
+
+    <!-- Login Activity -->
+    <string name="login">LOGIN</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="wrongCredentials">Username or password is wrong.</string>
+</resources>
