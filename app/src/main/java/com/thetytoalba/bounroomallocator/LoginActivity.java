@@ -9,12 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        startSender();
 
         final EditText username = (EditText) findViewById(R.id.usernameEditText);
         final EditText password = (EditText) findViewById(R.id.passwordEditText);
@@ -37,6 +44,34 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static void startSender() {
+        (new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Socket s = new Socket("192.168.1.20", 60010);
+                    BufferedWriter out = new BufferedWriter(
+                            new OutputStreamWriter(s.getOutputStream()));
+
+                    while (true) {
+                        out.write("Hello World!");
+                        out.newLine();
+                        out.flush();
+
+                        Thread.sleep(200);
+                    }
+
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     /**
