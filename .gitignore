@@ -9,6 +9,3 @@
 .externalNativeBuild
 /.metadata/
 Client/build/android-profile/*
-/.recommenders/
-.metadata/
-.recommenders/
