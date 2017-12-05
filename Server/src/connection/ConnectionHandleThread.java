@@ -129,6 +129,24 @@ public class ConnectionHandleThread extends Thread {
 					sendFailReply();
 				}
 				break;
+			case "signUpConnection":
+				try {
+					if (DatabaseAccess.signUserUp(obj.getJSONObject("credential"))) {
+						try {
+							JSONObject reply = new JSONObject();
+							reply.put("success", true);
+							sendReply(reply.toString());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						sendFailReply();
+					}
+				} catch (JSONException e) {
+					System.out.println("Failed to get credentials.");
+					sendFailReply();
+				}
+				break;
 			default:
 				break;
 		}

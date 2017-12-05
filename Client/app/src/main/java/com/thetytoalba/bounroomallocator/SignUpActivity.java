@@ -105,7 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        // try?
         initUserTypes();
         initPasswordVisibilityIcon();
         initSubmitButton();
@@ -198,6 +197,7 @@ public class SignUpActivity extends AppCompatActivity {
                     JSONObject credential = new JSONObject();
                     credential.put(Constants.TAG_USERNAME, username.getText().toString());
                     credential.put(Constants.TAG_PASSWORD, password.getText().toString());
+                    credential.put(Constants.TAG_USER_TYPE, userType);
                     objectToSend.put(Constants.TAG_CREDENTIAL, credential);
                     new SignUpTask(objectToSend).execute();
                 } catch (Exception e){
