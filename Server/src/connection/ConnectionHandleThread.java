@@ -1,3 +1,4 @@
+package connection;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.net.Socket;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import database.DatabaseAccess;
 
 public class ConnectionHandleThread extends Thread {
 	Socket socket;
