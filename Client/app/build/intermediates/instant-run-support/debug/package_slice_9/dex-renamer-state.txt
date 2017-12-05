@@ -1,4 +1,0 @@
-#Sun Dec 03 19:56:28 EET 2017
-base.0=/Users/vivian/Documents/BounRoomAllocator/Client/app/build/intermediates/transforms/dexMerger/debug/9
-path.0=classes.dex
-renamed.0=classes.dex
