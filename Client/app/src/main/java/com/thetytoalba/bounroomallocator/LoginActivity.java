@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -102,11 +104,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressBar = (ProgressBar) findViewById(R.id.login_progressBar);
 
         username = (EditText) findViewById(R.id.usernameEditText);
         password = (EditText) findViewById(R.id.passwordEditText);
@@ -129,11 +133,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void successfulLogin() {
+        hideProgress();
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
 
     public void failedLogin() {
+        hideProgress();
         username.setText("");
         password.setText("");
         Toast.makeText(getApplicationContext(),
@@ -159,6 +165,19 @@ public class LoginActivity extends AppCompatActivity {
             Log.e("LoginActivity", "Error while creating credential JSON.");
             return;
         }
+        showProgress();
         new LoginTask(loginObj).execute();
+    }
+
+
+    private void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 }

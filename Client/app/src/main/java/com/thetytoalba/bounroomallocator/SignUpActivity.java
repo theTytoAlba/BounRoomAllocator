@@ -7,9 +7,11 @@ import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Boolean result) {
+            Log.i("SignUpActivity", "SignUpTask post execute");
             if (socket != null) {
                 try {
                     socket.close();
@@ -100,11 +103,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private String userType = "";
     private boolean isVisible = false;
+    private ProgressBar progressBar;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        progressBar = (ProgressBar) findViewById(R.id.signUp_progressBar);
+
         initUserTypes();
         initPasswordVisibilityIcon();
         initSubmitButton();
@@ -169,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initSubmitButton() {
-        Button submit = (Button) findViewById(R.id.signUp_signUpButton);
+        submit = (Button) findViewById(R.id.signUp_signUpButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +207,7 @@ public class SignUpActivity extends AppCompatActivity {
                     credential.put(Constants.TAG_USER_TYPE, userType);
                     objectToSend.put(Constants.TAG_CREDENTIAL, credential);
                     new SignUpTask(objectToSend).execute();
+                    showProgress();
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -208,10 +216,25 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void successfulSignUp() {
-
+        Toast.makeText(getApplicationContext(), "Sign Up Successful!.", Toast.LENGTH_SHORT).show();
+        hideProgress();
     }
 
     private void failedSignUp() {
+        Toast.makeText(getApplicationContext(), "Sign Up Failed.", Toast.LENGTH_SHORT).show();
+        hideProgress();
+    }
 
+    private void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        submit.setVisibility(View.GONE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        submit.setVisibility(View.VISIBLE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 }
