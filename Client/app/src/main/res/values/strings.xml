@@ -7,4 +7,11 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="wrongCredentials">Username or password is wrong.</string>
+
+    <!-- SignUp Activity -->
+    <string name="bounedutr">\@boun.edu.tr</string>
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
+    <string name="facilitiesManager">Facilities Manager</string>
+    <string name="chooseType">Select Profile Type</string>
 </resources>
