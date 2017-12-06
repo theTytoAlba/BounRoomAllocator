@@ -21,6 +21,12 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignUpActivity">
         </activity>
+        <activity android:name=".ManagerActivity">
+        </activity>
+        <activity android:name=".StudentActivity">
+        </activity>
+        <activity android:name=".TeacherActivity">
+        </activity>
     </application>
 
 </manifest>

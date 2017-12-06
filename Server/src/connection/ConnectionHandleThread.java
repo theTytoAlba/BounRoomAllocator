@@ -56,8 +56,7 @@ public class ConnectionHandleThread extends Thread {
 	 * Tries to send reply to the connected socket. If the output stream fails 3
 	 * times, gives up and kills the thread.
 	 * 
-	 * @param message
-	 *            message to be sent
+	 * @param message message to be sent
 	 */
 	private void sendReply(String message) {
 		for (int i = 0; i < 3; i++) {
@@ -65,7 +64,7 @@ public class ConnectionHandleThread extends Thread {
 				out.write(message);
 				out.newLine();
 				out.flush();
-				System.out.println("Reply sent.");
+				System.out.println("Reply sent: " + message);
 				return;
 			} catch (Exception e) {
 				if (i < 2) {
@@ -111,44 +110,34 @@ public class ConnectionHandleThread extends Thread {
 
 		// Switch the connection type.
 		switch (connectionType) {
-			case "loginConnection":
-				try {
-					if (DatabaseAccess.logUserIn(obj.getJSONObject("credential"))) {
-						try {
-							JSONObject reply = new JSONObject();
-							reply.put("success", true);
-							sendReply(reply.toString());
-						} catch (JSONException e1) {
-							e1.printStackTrace();
-						}
-					} else {
-						sendFailReply();
+		case "loginConnection":
+			try {
+				sendReply(DatabaseAccess.logUserIn(obj.getJSONObject("credential")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to get credentials.");
+				sendFailReply();
+			}
+			break;
+		case "signUpConnection":
+			try {
+				if (DatabaseAccess.signUserUp(obj.getJSONObject("credential"))) {
+					try {
+						JSONObject reply = new JSONObject();
+						reply.put("success", true);
+						sendReply(reply.toString());
+					} catch (JSONException e1) {
+						e1.printStackTrace();
 					}
-				} catch (JSONException e) {
-					System.out.println("Failed to get credentials.");
+				} else {
 					sendFailReply();
 				}
-				break;
-			case "signUpConnection":
-				try {
-					if (DatabaseAccess.signUserUp(obj.getJSONObject("credential"))) {
-						try {
-							JSONObject reply = new JSONObject();
-							reply.put("success", true);
-							sendReply(reply.toString());
-						} catch (JSONException e1) {
-							e1.printStackTrace();
-						}
-					} else {
-						sendFailReply();
-					}
-				} catch (JSONException e) {
-					System.out.println("Failed to get credentials.");
-					sendFailReply();
-				}
-				break;
-			default:
-				break;
+			} catch (JSONException e) {
+				System.out.println("Failed to get credentials.");
+				sendFailReply();
+			}
+			break;
+		default:
+			break;
 		}
 	}
 

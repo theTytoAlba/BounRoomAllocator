@@ -30,10 +30,11 @@ import static com.thetytoalba.bounroomallocator.Constants.TAG_LOGIN_CONNECTION;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_PASSWORD;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_SUCCESS;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_USERNAME;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_USER_TYPE;
 
 public class LoginActivity extends AppCompatActivity {
 
-        private class LoginTask extends AsyncTask<Void, Void, Boolean> {
+        private class LoginTask extends AsyncTask<Void, Void, JSONObject> {
         JSONObject credentialMessage;
         private Socket socket;
         private BufferedWriter out;
@@ -44,8 +45,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
-            Boolean result = Boolean.FALSE;
+        protected JSONObject doInBackground(Void... voids) {
+            JSONObject result = null;
+            try {
+                result = new JSONObject().put("success", Boolean.FALSE);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ;
             try {
                 socket = new Socket(HOST_IP, HOST_PORT);
                 out = new BufferedWriter(
@@ -60,10 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 out.newLine();
                 out.flush();
 
-                JSONObject reply = new JSONObject(in.readLine());
-                if (reply.getBoolean(TAG_SUCCESS)) {
-                    result = Boolean.TRUE;
-                }
+                result = new JSONObject(in.readLine());
             } catch (Exception e) {
                 Log.e("LoginActivity", "Error while sending credentials to server.");
                 e.printStackTrace();
@@ -71,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             return result;
         }
 
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(JSONObject result) {
             if (socket != null) {
                 try {
                     socket.close();
@@ -94,11 +98,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-            if (result) {
-                successfulLogin();
-            } else {
-                failedLogin();
+            try {
+                if (result.getBoolean("success")) {
+                    successfulLogin(result);
+                    return;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
+            failedLogin(result);
         }
     }
 
@@ -132,19 +141,41 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void successfulLogin() {
+    public void successfulLogin(JSONObject result) {
         hideProgress();
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        finish();
+        String userType = "";
+        try {
+            userType = result.getString(TAG_USER_TYPE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (userType.equals("manager")) {
+                startActivity(new Intent(LoginActivity.this, ManagerActivity.class).putExtra(TAG_USERNAME, username.getText().toString()));
+                finish();
+                return;
+        } else if(userType.equals("teacher")) {
+            startActivity(new Intent(LoginActivity.this, TeacherActivity.class).putExtra(TAG_USERNAME, username.getText().toString()));
+            finish();
+            return;
+        } else if (userType.equals("student")){
+            startActivity(new Intent(LoginActivity.this, StudentActivity.class).putExtra(TAG_USERNAME, username.getText().toString()));
+            finish();
+            return;
+        }
+        Toast.makeText(getApplicationContext(), "Failed to complete login.", Toast.LENGTH_SHORT).show();
     }
 
-    public void failedLogin() {
+    public void failedLogin(JSONObject result) {
         hideProgress();
         username.setText("");
         password.setText("");
-        Toast.makeText(getApplicationContext(),
-                getResources().getString(R.string.wrongCredentials),
-                Toast.LENGTH_SHORT).show();
+        String err = "Could not login.";
+        try {
+            err += result.getString("errorReason");
+        } catch (Exception e) {
+            Log.i("LoginActivity", "Login fail reason not specified.");
+        }
+        Toast.makeText(getApplicationContext(), err, Toast.LENGTH_SHORT).show();
     }
 
     /**

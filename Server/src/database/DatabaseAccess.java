@@ -11,7 +11,8 @@ import org.json.JSONObject;
 public class DatabaseAccess {
 	private static String USERS_DATABASE = "src/database/users.dat";
 	
-	synchronized public static boolean logUserIn (JSONObject credential) {
+	synchronized public static JSONObject logUserIn (JSONObject credential) {
+		JSONObject result = new JSONObject();
 		String username = "";
 		String password = "";
 		try {
@@ -19,16 +20,30 @@ public class DatabaseAccess {
 			password = credential.getString("password");
 		} catch (JSONException e) {
 			System.out.println("Failed to resolve credential JSON.");
-			return false;
+			try {
+				result.put("success", false);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return result;
 		}
 		
 		JSONObject database = getDatabase(USERS_DATABASE);
 		try {
-			return database.has(username) && database.getJSONObject(username).has("password") && database.getJSONObject(username).getString("password").equals(password);
+			if (database.has(username) && database.getJSONObject(username).has("password") && database.getJSONObject(username).getString("password").equals(password)) {
+				result.put("success", true);
+				result.put("userType", database.getJSONObject(username).getString("userType"));
+				return result;
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
-			return false;
 		}
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	synchronized public static boolean signUserUp (JSONObject credential) {

@@ -5,7 +5,7 @@ package com.thetytoalba.bounroomallocator;
  */
 
 class Constants {
-    static String HOST_IP ="192.168.4.28";
+    static String HOST_IP ="192.168.1.144";
     static int HOST_PORT = 60015;
 
     static String TAG_CONNECTION_TYPE = "connectionType";
