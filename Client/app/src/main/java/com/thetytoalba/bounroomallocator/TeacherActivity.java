@@ -1,5 +1,6 @@
 package com.thetytoalba.bounroomallocator;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -184,7 +185,15 @@ public class TeacherActivity extends AppCompatActivity {
                     Drawable drawable = DrawableCompat.wrap(roomAction.getDrawable());
                     DrawableCompat.setTintList(drawable, csl);
                     roomAction.setImageDrawable(drawable);
-                    
+                    roomAction.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(TeacherActivity.this, RoomCalendarActivity.class);
+                            intent.putExtra(TAG_BUILDING_NAME, buildingName);
+                            intent.putExtra(TAG_ROOM_NAME, roomName);
+                            startActivity(intent);
+                        }
+                    });
                     buildingRooms.addView(roomLayout);
                 }
             } catch (Exception e) {

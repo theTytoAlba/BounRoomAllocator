@@ -8,8 +8,10 @@ import org.json.JSONObject;
 public class DatabaseAccess {
 	private static String USERS_DATABASE = "src/database/users.dat";
 	private static String ROOMS_DATABASE = "src/database/rooms.dat";
-	private static Lock usersLock = new ReentrantLock();;
-	private static Lock roomsLock = new ReentrantLock();;
+	private static String WEEK_DATABASE = "src/database/rooms.dat";
+	private static Lock usersLock = new ReentrantLock();
+	private static Lock roomsLock = new ReentrantLock();
+	private static Lock weekLock = new ReentrantLock();;
 	
 	public static JSONObject logUserIn (JSONObject credential) {
 		usersLock.lock();
@@ -288,4 +290,5 @@ public class DatabaseAccess {
 		roomsLock.unlock();
 		return result;
 	}
+
 }

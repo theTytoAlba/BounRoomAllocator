@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".AddRoomActivity">
         </activity>
+        <activity android:name=".RoomCalendarActivity">
+        </activity>
     </application>
 
 </manifest>
