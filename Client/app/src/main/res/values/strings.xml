@@ -25,4 +25,8 @@
     <string name="roomName">Room Name:</string>
     <string name="roomCapacity">Room Capacity:</string>
 
+    <!-- Teacher Activity -->
+    <string name="addLecture">Add\nLecture</string>
+
+
 </resources>

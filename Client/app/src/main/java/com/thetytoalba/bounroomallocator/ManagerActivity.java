@@ -311,7 +311,7 @@ public class ManagerActivity extends AppCompatActivity {
                     buildingContainer.findViewById(R.id.buildingContainer_delete).setVisibility(View.VISIBLE);
                     for(int index2 = 0; index2<((ViewGroup)buildingContainer.findViewById(R.id.buildingContainer_roomContainer)).getChildCount(); ++index2) {
                         LinearLayout roomContainer = (LinearLayout) ((ViewGroup)buildingContainer.findViewById(R.id.buildingContainer_roomContainer)).getChildAt(index2);
-                        roomContainer.findViewById(R.id.roomContainer_delete).setVisibility(GONE);
+                        roomContainer.findViewById(R.id.roomContainer_action).setVisibility(GONE);
                         roomContainer.findViewById(R.id.roomContainer_deleteForSure).setVisibility(GONE);
                         roomContainer.findViewById(R.id.roomContainer_deleteCancel).setVisibility(GONE);
                     }
@@ -328,7 +328,7 @@ public class ManagerActivity extends AppCompatActivity {
                     buildingContainer.findViewById(R.id.buildingContainer_delete).setVisibility(GONE);
                     for(int index2 = 0; index2<((ViewGroup)buildingContainer.findViewById(R.id.buildingContainer_roomContainer)).getChildCount(); ++index2) {
                         LinearLayout roomContainer = (LinearLayout) ((ViewGroup)buildingContainer.findViewById(R.id.buildingContainer_roomContainer)).getChildAt(index2);
-                        roomContainer.findViewById(R.id.roomContainer_delete).setVisibility(View.VISIBLE);
+                        roomContainer.findViewById(R.id.roomContainer_action).setVisibility(View.VISIBLE);
                         roomContainer.findViewById(R.id.roomContainer_deleteForSure).setVisibility(GONE);
                         roomContainer.findViewById(R.id.roomContainer_deleteCancel).setVisibility(GONE);
                     }
@@ -402,7 +402,7 @@ public class ManagerActivity extends AppCompatActivity {
 
                     final TextView roomDeleteForSure = roomLayout.findViewById(R.id.roomContainer_deleteForSure);
                     final TextView roomDeleteCancel = roomLayout.findViewById(R.id.roomContainer_deleteCancel);
-                    final ImageView roomDelete = roomLayout.findViewById(R.id.roomContainer_delete);
+                    final ImageView roomDelete = roomLayout.findViewById(R.id.roomContainer_action);
 
                     roomDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -448,7 +448,7 @@ public class ManagerActivity extends AppCompatActivity {
             roomNameText.setText("Add new room");
             ImageView icon = roomLayout.findViewById(R.id.bulletpoint_icon);
             icon.setImageResource(R.drawable.add_icon);
-            roomLayout.findViewById(R.id.roomContainer_delete).setVisibility(GONE);
+            roomLayout.findViewById(R.id.roomContainer_action).setVisibility(GONE);
             buildingRooms.addView(roomLayout);
             roomLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
