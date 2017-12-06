@@ -30,12 +30,11 @@ public class ConnectionHandleThread extends Thread {
 		String line = "";
 		try {
 			line = in.readLine();
-			System.out.println(line);
 		} catch (IOException e1) {
 			System.out.println("Failed to read the line.");
 			e1.printStackTrace();
 		}
-		System.out.println("Received message.");
+		System.out.println("Received message: " + line);
 		try {
 			JSONObject obj = new JSONObject(line);
 			handleConnection(obj);

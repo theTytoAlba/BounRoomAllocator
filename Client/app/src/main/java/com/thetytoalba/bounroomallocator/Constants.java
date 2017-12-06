@@ -5,7 +5,7 @@ package com.thetytoalba.bounroomallocator;
  */
 
 class Constants {
-    static String HOST_IP ="192.168.1.144";
+    static String HOST_IP ="192.168.4.193";
     static int HOST_PORT = 60015;
 
     // Connection types
@@ -29,4 +29,8 @@ class Constants {
     static String TAG_BUILDING_NAME = "buildingName";
     static String TAG_BUILDING = "building";
     static String TAG_ROOMS = "rooms";
+    static String TAG_ROOM = "room";
+    static String TAG_ROOM_NAME = "roomName";
+    static String TAG_ROOM_CAPACITY = "roomCapacity";
+
 }

@@ -30,6 +30,7 @@ import java.util.Iterator;
 import static com.thetytoalba.bounroomallocator.Constants.HOST_IP;
 import static com.thetytoalba.bounroomallocator.Constants.HOST_PORT;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ADD_BUILDING_CONNECTION;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_BUILDING_NAME;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_CONNECTION_TYPE;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_GET_ROOMS_CONNECTION;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOMS;
@@ -162,7 +163,7 @@ public class ManagerActivity extends AppCompatActivity {
         roomsContainer.removeAllViews();
         while (buildingIterator.hasNext()) {
             // Set building
-            String buildingName = (String)buildingIterator.next();
+            final String buildingName = (String)buildingIterator.next();
             LinearLayout buildingLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_building_container, null);
             LinearLayout buildingRooms = buildingLayout.findViewById(R.id.buildingContainer_roomContainer);
             TextView buildingNameText = buildingLayout.findViewById(R.id.buildingContainer_buildingName);
@@ -190,6 +191,14 @@ public class ManagerActivity extends AppCompatActivity {
             ImageView icon = roomLayout.findViewById(R.id.bulletpoint_icon);
             icon.setImageResource(R.drawable.add_icon);
             buildingRooms.addView(roomLayout);
+            roomLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ManagerActivity.this, AddRoomActivity.class);
+                    intent.putExtra(TAG_BUILDING_NAME, buildingName);
+                    startActivity(intent);
+                }
+            });
         }
         hideProgress();
     }
