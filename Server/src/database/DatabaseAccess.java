@@ -127,5 +127,28 @@ public class DatabaseAccess {
 		usersLock.unlock();
 		return result;
 	}
+
+	public static JSONObject getRooms () {
+		roomsLock.lock();
+		JSONObject result = new JSONObject();
+		
+		JSONObject database = DatabaseHelper.getDatabase(ROOMS_DATABASE);
+		try {
+			result.put("success", true);
+			result.put("rooms", database);
+			roomsLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		usersLock.unlock();
+		return result;
+	}
 	
 }

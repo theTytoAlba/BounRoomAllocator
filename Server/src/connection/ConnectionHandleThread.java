@@ -144,9 +144,13 @@ public class ConnectionHandleThread extends Thread {
 				sendFailReply();
 			}
 			break;
+		case "getRoomsConnection":
+			sendReply(DatabaseAccess.getRooms().toString());
+			break;
 		default:
 			break;
 		}
+		
 	}
 
 	/**

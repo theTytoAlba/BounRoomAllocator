@@ -13,6 +13,7 @@ class Constants {
     static String TAG_LOGIN_CONNECTION = "loginConnection";
     static String TAG_SIGN_UP_CONNECTION = "signUpConnection";
     static String TAG_ADD_BUILDING_CONNECTION = "addBuildingConnection";
+    static String TAG_GET_ROOMS_CONNECTION = "getRoomsConnection";
 
     static String TAG_SUCCESS = "success";
     static String TAG_CREDENTIAL = "credential";
@@ -26,4 +27,5 @@ class Constants {
     static String TAG_MANAGER = "manager";
     static String TAG_BUILDING_NAME = "buildingName";
     static String TAG_BUILDING = "building";
+    static String TAG_ROOMS = "rooms";
 }
