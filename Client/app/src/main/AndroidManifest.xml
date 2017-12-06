@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".AddBuildingActivity">
         </activity>
+        <activity android:name=".AddRoomActivity">
+        </activity>
     </application>
 
 </manifest>

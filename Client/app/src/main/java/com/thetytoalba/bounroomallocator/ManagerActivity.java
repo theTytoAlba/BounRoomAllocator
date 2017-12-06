@@ -32,6 +32,7 @@ import static com.thetytoalba.bounroomallocator.Constants.HOST_PORT;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ADD_BUILDING_CONNECTION;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_CONNECTION_TYPE;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_GET_ROOMS_CONNECTION;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOMS;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_SUCCESS;
 
 public class ManagerActivity extends AppCompatActivity {
@@ -102,7 +103,7 @@ public class ManagerActivity extends AppCompatActivity {
 
             try {
                 if (result.getBoolean(TAG_SUCCESS)) {
-                    successfulGetBuildings(result.getJSONObject("rooms"));
+                    successfulGetBuildings(result.getJSONObject(TAG_ROOMS));
                     return;
                 }
             } catch (JSONException e) {
@@ -182,6 +183,13 @@ public class ManagerActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Log.e("ManagerActivity", "Could not handle building object for " + buildingName);
             }
+            // Add new room line
+            LinearLayout roomLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_room_container, null);
+            TextView roomNameText = roomLayout.findViewById(R.id.roomContainer_roomName);
+            roomNameText.setText("Add new room");
+            ImageView icon = roomLayout.findViewById(R.id.bulletpoint_icon);
+            icon.setImageResource(R.drawable.add_icon);
+            buildingRooms.addView(roomLayout);
         }
         hideProgress();
     }

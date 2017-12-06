@@ -5,6 +5,7 @@
               android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/bulletpoint_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/bulletpoint_icon"
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="Room name"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"/>

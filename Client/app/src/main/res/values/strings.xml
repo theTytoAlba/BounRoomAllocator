@@ -20,5 +20,7 @@
     <string name="addBuilding">Add\nBuilding</string>
     <string name="addRoom">Add\nRoom</string>
     <string name="buildingName">Building Name:</string>
+    <string name="roomName">Room Name:</string>
+    <string name="roomCapacity">Room Capacity:</string>
 
 </resources>

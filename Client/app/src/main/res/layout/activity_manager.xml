@@ -40,17 +40,6 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:text="@string/addBuilding"/>
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
-        <Button
-            android:id="@+id/addRoomButton"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:text="@string/addRoom"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

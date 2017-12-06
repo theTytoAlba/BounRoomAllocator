@@ -147,6 +147,14 @@ public class ConnectionHandleThread extends Thread {
 		case "getRoomsConnection":
 			sendReply(DatabaseAccess.getRooms().toString());
 			break;
+		case "addRoomConnection":
+			try {
+				sendReply(DatabaseAccess.addRoom(obj.getJSONObject("room")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to get room object.");
+				sendFailReply();
+			}
+			break;
 		default:
 			break;
 		}
