@@ -1,17 +1,17 @@
 package database;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.concurrent.locks.Lock;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DatabaseAccess {
 	private static String USERS_DATABASE = "src/database/users.dat";
+	private static String ROOMS_DATABASE = "src/database/rooms.dat";
+	private static Lock usersLock;
+	private static Lock roomsLock;
 	
-	synchronized public static JSONObject logUserIn (JSONObject credential) {
+	public static JSONObject logUserIn (JSONObject credential) {
+		usersLock.lock();
 		JSONObject result = new JSONObject();
 		String username = "";
 		String password = "";
@@ -25,14 +25,16 @@ public class DatabaseAccess {
 			} catch (JSONException e1) {
 				e1.printStackTrace();
 			}
+			usersLock.unlock();
 			return result;
 		}
 		
-		JSONObject database = getDatabase(USERS_DATABASE);
+		JSONObject database = DatabaseHelper.getDatabase(USERS_DATABASE);
 		try {
 			if (database.has(username) && database.getJSONObject(username).has("password") && database.getJSONObject(username).getString("password").equals(password)) {
 				result.put("success", true);
 				result.put("userType", database.getJSONObject(username).getString("userType"));
+				usersLock.unlock();
 				return result;
 			}
 		} catch (JSONException e) {
@@ -43,10 +45,12 @@ public class DatabaseAccess {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		usersLock.unlock();
 		return result;
 	}
 	
-	synchronized public static boolean signUserUp (JSONObject credential) {
+	public static boolean signUserUp (JSONObject credential) {
+		usersLock.lock();
 		String username = "";
 		String password = "";
 		String userType = "";
@@ -57,57 +61,70 @@ public class DatabaseAccess {
 			userType = credential.getString("userType");
 		} catch (JSONException e) {
 			System.out.println("Failed to resolve credential JSON.");
+			usersLock.unlock();
 			return false;
 		}
 		// Get database
-		JSONObject database = getDatabase(USERS_DATABASE);
+		JSONObject database = DatabaseHelper.getDatabase(USERS_DATABASE);
 		// Modify database
 		try {
 			if (database.has(username)) {
+				usersLock.unlock();
 				return false;
 			}
 			database.put(username, (new JSONObject()).put("password", password).put("userType", userType));
 		} catch (Exception e) {
 			e.printStackTrace();
+			usersLock.unlock();
 			return false;
 		}
 		// Save database and return
-		return updateDatabase(USERS_DATABASE, database);
+		boolean res = DatabaseHelper.updateDatabase(USERS_DATABASE, database); 
+		usersLock.unlock();
+		return res;
 	}
 	
-	public static JSONObject getDatabase(String path) {
+	public static JSONObject addBuilding (JSONObject building) {
+		roomsLock.lock();
+		JSONObject result = new JSONObject();
+		String buildingName = "";
 		try {
-			BufferedReader dbReader = new BufferedReader(new FileReader(path));
-			JSONObject database = new JSONObject(dbReader.readLine());
-			dbReader.close();
-			return database;
-		} catch (Exception e) {
-			System.out.println("Failed to read database");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public static boolean updateDatabase(String path, JSONObject newDatabase) {
-		try {
-			BufferedWriter dbWriter = new BufferedWriter(new FileWriter(path + ".temp"));
-			dbWriter.write(newDatabase.toString());
-			dbWriter.close();
-			
-			File fileTemp = new File(path + ".temp");
-			File fileDat = new File(path);
-			boolean success = fileTemp.renameTo(fileDat);
-			if (!success) {
-				System.out.println("Could not rename database.");
-				return false;
+			buildingName = building.getString("name");
+		} catch (JSONException e) {
+			System.out.println("Failed to resolve building JSON.");
+			try {
+				result.put("success", false);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
 			}
-			
-			System.out.println("Database updated.");
-			return true;
-		} catch (Exception e) {
-			System.out.println("Failed to update database");
-			e.printStackTrace();
-			return false;
+			roomsLock.unlock();
+			return result;
 		}
+		
+		JSONObject database = DatabaseHelper.getDatabase(ROOMS_DATABASE);
+		try {
+			if (database.has(buildingName)) {
+				result.put("success", false);
+				System.out.println("Building already exists.");
+				roomsLock.unlock();
+				return result;
+			}
+			database.put(buildingName, new JSONObject());
+			DatabaseHelper.updateDatabase(ROOMS_DATABASE, database);
+			result.put("success", true);
+			roomsLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		usersLock.unlock();
+		return result;
 	}
+	
 }
