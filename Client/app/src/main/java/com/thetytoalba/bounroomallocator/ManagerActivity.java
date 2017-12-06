@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -113,6 +114,7 @@ public class ManagerActivity extends AppCompatActivity {
     }
 
     ProgressBar progressBar;
+    ImageView refreshIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +123,8 @@ public class ManagerActivity extends AppCompatActivity {
         Log.i("ManagerActivity", "Started app in manager mode.");
 
         progressBar = (ProgressBar) findViewById(R.id.managerActivity_progress);
+        refreshIcon = (ImageView) findViewById(R.id.managerActivity_refreshIcon);
+
         Button buildingButton = (Button) findViewById(R.id.addBuildingButton);
         buildingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,19 +133,32 @@ public class ManagerActivity extends AppCompatActivity {
             }
         });
 
-        try {
-            new GetRoomsTask(new JSONObject().put(TAG_CONNECTION_TYPE, TAG_GET_ROOMS_CONNECTION)).execute();
-            showProgress();
-        } catch (JSONException e) {
-            e.printStackTrace();
-            failedGetBuildings();
-        }
+        refreshIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    new GetRoomsTask(new JSONObject().put(TAG_CONNECTION_TYPE, TAG_GET_ROOMS_CONNECTION)).execute();
+                    showProgress();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    failedGetBuildings();
+                }
+            }
+        });
+
+        refreshIcon.performClick();
     }
 
+    @Override
+    protected void onResume () {
+        super.onResume();
+        refreshIcon.performClick();
+    }
     private void successfulGetBuildings(JSONObject rooms) {
         Log.i("ManagerActivity", "Received the rooms. Layout in progress");
         Iterator<?> keys = rooms.keys();
         LinearLayout buildingContainer = (LinearLayout) findViewById(R.id.managerActivity_buildingContainer);
+        buildingContainer.removeAllViews();
         while (keys.hasNext()) {
             String buildingName = (String)keys.next();
             LinearLayout buildingLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_building_container, null);
@@ -159,12 +176,14 @@ public class ManagerActivity extends AppCompatActivity {
 
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
+        refreshIcon.setVisibility(View.GONE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private void hideProgress() {
         progressBar.setVisibility(View.GONE);
+        refreshIcon.setVisibility(View.VISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 }

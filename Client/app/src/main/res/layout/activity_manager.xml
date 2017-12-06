@@ -19,12 +19,23 @@
             android:textColor="@color/colorPrimaryDark"/>
         <ProgressBar
             android:id="@+id/managerActivity_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/managerActivity_refreshIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/refresh_icon"
+            android:background="@color/colorAccentLight"
+            android:tint="@color/white"/>
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
         <Button
             android:id="@+id/addBuildingButton"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
@@ -35,7 +46,7 @@
             android:background="@color/white"/>
         <Button
             android:id="@+id/addRoomButton"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
