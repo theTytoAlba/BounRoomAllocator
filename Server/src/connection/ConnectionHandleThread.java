@@ -162,6 +162,14 @@ public class ConnectionHandleThread extends Thread {
 				sendFailReply();
 			}
 			break;
+		case "deleteBuildingConnection":
+			try {
+				sendReply(DatabaseAccess.deleteBuilding(obj.getString("buildingName")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to delete building.");
+				sendFailReply();
+			}
+			break;
 		default:
 			break;
 		}

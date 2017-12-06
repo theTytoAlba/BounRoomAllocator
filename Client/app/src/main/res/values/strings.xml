@@ -18,6 +18,8 @@
     <!-- Manager Activity -->
     <string name="Welcome">Welcome!</string>
     <string name="addBuilding">Add\nBuilding</string>
+    <string name="deleteBuilding">Delete\nBuilding</string>
+    <string name="cancelDelete">Cancel\nDelete</string>
     <string name="addRoom">Add\nRoom</string>
     <string name="buildingName">Building Name:</string>
     <string name="roomName">Room Name:</string>

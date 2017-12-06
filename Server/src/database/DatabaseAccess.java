@@ -258,4 +258,34 @@ public class DatabaseAccess {
 		roomsLock.unlock();
 		return result;
 	}
+	
+	public static JSONObject deleteBuilding(String buildingName) {
+		roomsLock.lock();
+		JSONObject result = new JSONObject();
+		JSONObject database = DatabaseHelper.getDatabase(ROOMS_DATABASE);
+		try {
+			if (!database.has(buildingName)) {
+				result.put("success", false);
+				System.out.println("Building does not exists.");
+				roomsLock.unlock();
+				return result;
+			}
+			database.remove(buildingName);
+			DatabaseHelper.updateDatabase(ROOMS_DATABASE, database);
+			result.put("success", true);
+			result.put("buildingName", buildingName);
+			roomsLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		roomsLock.unlock();
+		return result;
+	}
 }
