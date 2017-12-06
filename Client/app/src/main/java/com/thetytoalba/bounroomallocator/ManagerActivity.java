@@ -5,10 +5,14 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -20,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Iterator;
 
 import static com.thetytoalba.bounroomallocator.Constants.HOST_IP;
 import static com.thetytoalba.bounroomallocator.Constants.HOST_PORT;
@@ -96,7 +101,7 @@ public class ManagerActivity extends AppCompatActivity {
 
             try {
                 if (result.getBoolean(TAG_SUCCESS)) {
-                    successfulGetBuildings(result);
+                    successfulGetBuildings(result.getJSONObject("rooms"));
                     return;
                 }
             } catch (JSONException e) {
@@ -133,9 +138,18 @@ public class ManagerActivity extends AppCompatActivity {
         }
     }
 
-    private void successfulGetBuildings(JSONObject result) {
+    private void successfulGetBuildings(JSONObject rooms) {
+        Log.i("ManagerActivity", "Received the rooms. Layout in progress");
+        Iterator<?> keys = rooms.keys();
+        LinearLayout buildingContainer = (LinearLayout) findViewById(R.id.managerActivity_buildingContainer);
+        while (keys.hasNext()) {
+            String buildingName = (String)keys.next();
+            LinearLayout buildingLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_building_container, null);
+            TextView buildingNameText = buildingLayout.findViewById(R.id.buildingContainer_buildingName);
+            buildingNameText.setText(buildingName);
+            buildingContainer.addView(buildingLayout);
+        }
         hideProgress();
-        Log.i("ManagerActivity", result.toString());
     }
 
     private void failedGetBuildings() {
