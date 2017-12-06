@@ -156,15 +156,32 @@ public class ManagerActivity extends AppCompatActivity {
     }
     private void successfulGetBuildings(JSONObject rooms) {
         Log.i("ManagerActivity", "Received the rooms. Layout in progress");
-        Iterator<?> keys = rooms.keys();
-        LinearLayout buildingContainer = (LinearLayout) findViewById(R.id.managerActivity_buildingContainer);
-        buildingContainer.removeAllViews();
-        while (keys.hasNext()) {
-            String buildingName = (String)keys.next();
+        Iterator<?> buildingIterator = rooms.keys();
+        LinearLayout roomsContainer = (LinearLayout) findViewById(R.id.managerActivity_buildingContainer);
+        roomsContainer.removeAllViews();
+        while (buildingIterator.hasNext()) {
+            // Set building
+            String buildingName = (String)buildingIterator.next();
             LinearLayout buildingLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_building_container, null);
+            LinearLayout buildingRooms = buildingLayout.findViewById(R.id.buildingContainer_roomContainer);
             TextView buildingNameText = buildingLayout.findViewById(R.id.buildingContainer_buildingName);
             buildingNameText.setText(buildingName);
-            buildingContainer.addView(buildingLayout);
+            roomsContainer.addView(buildingLayout);
+            // Set rooms
+            try {
+                JSONObject buildingObject = rooms.getJSONObject(buildingName);
+                Iterator<?> roomIterator = buildingObject.keys();
+                while (roomIterator.hasNext()) {
+                    String roomName = (String)roomIterator.next();
+                    LinearLayout roomLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_room_container, null);
+                    TextView roomNameText = roomLayout.findViewById(R.id.roomContainer_roomName);
+                    roomNameText.setText(roomName);
+                    buildingRooms.addView(roomLayout);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("ManagerActivity", "Could not handle building object for " + buildingName);
+            }
         }
         hideProgress();
     }

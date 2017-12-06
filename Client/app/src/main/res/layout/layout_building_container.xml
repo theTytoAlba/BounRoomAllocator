@@ -19,4 +19,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         />
+    <LinearLayout
+        android:id="@+id/buildingContainer_roomContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
 </LinearLayout>
