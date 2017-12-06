@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".TeacherActivity">
         </activity>
+        <activity android:name=".AddBuildingActivity">
+        </activity>
     </application>
 
 </manifest>

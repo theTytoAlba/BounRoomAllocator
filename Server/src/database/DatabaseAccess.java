@@ -1,5 +1,6 @@
 package database;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,8 +8,8 @@ import org.json.JSONObject;
 public class DatabaseAccess {
 	private static String USERS_DATABASE = "src/database/users.dat";
 	private static String ROOMS_DATABASE = "src/database/rooms.dat";
-	private static Lock usersLock;
-	private static Lock roomsLock;
+	private static Lock usersLock = new ReentrantLock();;
+	private static Lock roomsLock = new ReentrantLock();;
 	
 	public static JSONObject logUserIn (JSONObject credential) {
 		usersLock.lock();
@@ -89,7 +90,7 @@ public class DatabaseAccess {
 		JSONObject result = new JSONObject();
 		String buildingName = "";
 		try {
-			buildingName = building.getString("name");
+			buildingName = building.getString("buildingName");
 		} catch (JSONException e) {
 			System.out.println("Failed to resolve building JSON.");
 			try {

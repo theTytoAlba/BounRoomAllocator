@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         protected JSONObject doInBackground(Void... voids) {
             JSONObject result = null;
             try {
-                result = new JSONObject().put("success", Boolean.FALSE);
+                result = new JSONObject().put(TAG_SUCCESS, Boolean.FALSE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             try {
-                if (result.getBoolean("success")) {
+                if (result.getBoolean(TAG_SUCCESS)) {
                     successfulLogin(result);
                     return;
                 }

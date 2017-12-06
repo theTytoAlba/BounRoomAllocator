@@ -14,4 +14,11 @@
     <string name="teacher">Teacher</string>
     <string name="facilitiesManager">Facilities Manager</string>
     <string name="chooseType">Select Profile Type</string>
+
+    <!-- Manager Activity -->
+    <string name="Welcome">Welcome!</string>
+    <string name="addBuilding">Add\nBuilding</string>
+    <string name="addRoom">Add\nRoom</string>
+    <string name="buildingName">Building Name:</string>
+
 </resources>
