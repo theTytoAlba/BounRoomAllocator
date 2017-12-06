@@ -3,7 +3,6 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-
     <ImageView
         android:id="@+id/bulletpoint_icon"
         android:layout_width="30dp"
@@ -15,12 +14,45 @@
         />
     <TextView
         android:id="@+id/roomContainer_roomName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="Room name"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"/>
+    <ImageView
+        android:id="@+id/roomContainer_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_marginRight="40dp"
+        android:src="@drawable/trash"
+        android:tint="@color/red"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/roomContainer_deleteForSure"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:text="Delete"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/roomContainer_deleteCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_marginRight="40dp"
+        android:text="Cancel"
+        android:background="@color/green"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        />
 </LinearLayout>

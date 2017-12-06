@@ -1,7 +1,9 @@
 package com.thetytoalba.bounroomallocator;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,10 +32,13 @@ import java.util.Iterator;
 import static com.thetytoalba.bounroomallocator.Constants.HOST_IP;
 import static com.thetytoalba.bounroomallocator.Constants.HOST_PORT;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ADD_BUILDING_CONNECTION;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_ADD_ROOM_CONNECTION;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_BUILDING_NAME;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_CONNECTION_TYPE;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_GET_ROOMS_CONNECTION;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOM;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOMS;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOM_NAME;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_SUCCESS;
 
 public class ManagerActivity extends AppCompatActivity {
@@ -64,7 +69,7 @@ public class ManagerActivity extends AppCompatActivity {
                 in = new BufferedReader(
                         new InputStreamReader(socket.getInputStream()));
             } catch (Exception e) {
-                Log.e("LoginActivity", "Failed to establish connection.");
+                Log.e("ManagerActivity", "Failed to establish connection.");
             }
             try {
                 out.write(getRoomsMessage.toString());
@@ -73,7 +78,7 @@ public class ManagerActivity extends AppCompatActivity {
 
                 result = new JSONObject(in.readLine());
             } catch (Exception e) {
-                Log.e("LoginActivity", "Error while sending credentials to server.");
+                Log.e("ManagerActivity", "Error while sending credentials to server.");
                 e.printStackTrace();
             }
             return result;
@@ -84,21 +89,21 @@ public class ManagerActivity extends AppCompatActivity {
                 try {
                     socket.close();
                 } catch (IOException e) {
-                    Log.e("LoginActivity", "Failed to close socket.");
+                    Log.e("ManagerActivity", "Failed to close socket.");
                 }
             }
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    Log.e("LoginActivity", "Failed to close input stream.");
+                    Log.e("ManagerActivity", "Failed to close input stream.");
                 }
             }
             if (out != null) {
                 try {
                     out.close();
                 } catch (IOException e) {
-                    Log.e("LoginActivity", "Failed to close output stream.");
+                    Log.e("ManagerActivity", "Failed to close output stream.");
                 }
             }
 
@@ -112,6 +117,84 @@ public class ManagerActivity extends AppCompatActivity {
             }
 
             failedGetBuildings();
+        }
+    }
+
+
+    private class DeleteRoomTask extends AsyncTask<Void, Void, JSONObject> {
+        JSONObject deleteRoomMessage;
+        private Socket socket;
+        private BufferedWriter out;
+        private BufferedReader in;
+
+        DeleteRoomTask(JSONObject deleteRoomMessage) {
+            this.deleteRoomMessage = deleteRoomMessage;
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+            JSONObject result = null;
+            try {
+                result = new JSONObject().put(TAG_SUCCESS, Boolean.FALSE);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ;
+            try {
+                socket = new Socket(HOST_IP, HOST_PORT);
+                out = new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream()));
+                in = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
+            } catch (Exception e) {
+                Log.e("ManagerActivity", "Failed to establish connection.");
+            }
+            try {
+                out.write(deleteRoomMessage.toString());
+                out.newLine();
+                out.flush();
+
+                result = new JSONObject(in.readLine());
+            } catch (Exception e) {
+                Log.e("ManagerActivity", "Error while sending credentials to server.");
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        protected void onPostExecute(JSONObject result) {
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    Log.e("ManagerActivity", "Failed to close socket.");
+                }
+            }
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    Log.e("ManagerActivity", "Failed to close input stream.");
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    Log.e("ManagerActivity", "Failed to close output stream.");
+                }
+            }
+
+            try {
+                if (result.getBoolean(TAG_SUCCESS)) {
+                    successfulDeleteRoom(result.getString(TAG_ROOM_NAME), result.getString(TAG_BUILDING_NAME));
+                    return;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            failedDeleteRoom();
         }
     }
 
@@ -174,10 +257,47 @@ public class ManagerActivity extends AppCompatActivity {
                 JSONObject buildingObject = rooms.getJSONObject(buildingName);
                 Iterator<?> roomIterator = buildingObject.keys();
                 while (roomIterator.hasNext()) {
-                    String roomName = (String)roomIterator.next();
+                    final String roomName = (String)roomIterator.next();
                     LinearLayout roomLayout = (LinearLayout) this.getLayoutInflater().inflate(R.layout.layout_room_container, null);
                     TextView roomNameText = roomLayout.findViewById(R.id.roomContainer_roomName);
                     roomNameText.setText(roomName);
+
+                    final TextView roomDeleteForSure = roomLayout.findViewById(R.id.roomContainer_deleteForSure);
+                    final TextView roomDeleteCancel = roomLayout.findViewById(R.id.roomContainer_deleteCancel);
+                    final ImageView roomDelete = roomLayout.findViewById(R.id.roomContainer_delete);
+
+                    roomDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            roomDelete.setVisibility(View.GONE);
+                            roomDeleteForSure.setVisibility(View.VISIBLE);
+                            roomDeleteCancel.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+                    roomDeleteCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            roomDelete.setVisibility(View.VISIBLE);
+                            roomDeleteForSure.setVisibility(View.GONE);
+                            roomDeleteCancel.setVisibility(View.GONE);
+                        }
+                    });
+                    roomDeleteForSure.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try{
+                                JSONObject objectToSend = new JSONObject();
+                                objectToSend.put(TAG_CONNECTION_TYPE, Constants.TAG_DELETE_ROOM_CONNECTION);
+                                objectToSend.put(TAG_ROOM, new JSONObject().put(TAG_ROOM_NAME, roomName).put(TAG_BUILDING_NAME, buildingName));
+                                showProgress();
+                                new DeleteRoomTask(objectToSend).execute();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Failed to delete room.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                     buildingRooms.addView(roomLayout);
                 }
             } catch (Exception e) {
@@ -190,6 +310,7 @@ public class ManagerActivity extends AppCompatActivity {
             roomNameText.setText("Add new room");
             ImageView icon = roomLayout.findViewById(R.id.bulletpoint_icon);
             icon.setImageResource(R.drawable.add_icon);
+            roomLayout.findViewById(R.id.roomContainer_delete).setVisibility(View.GONE);
             buildingRooms.addView(roomLayout);
             roomLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -219,5 +340,17 @@ public class ManagerActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         refreshIcon.setVisibility(View.VISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void successfulDeleteRoom(String roomName, String buildingName) {
+        hideProgress();
+        Toast.makeText(getApplicationContext(), "Room " + roomName + " was successfully deleted from building " + buildingName, Toast.LENGTH_LONG).show();
+        refreshIcon.performClick();
+    }
+
+    private void failedDeleteRoom() {
+        hideProgress();
+        Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+        refreshIcon.performClick();
     }
 }

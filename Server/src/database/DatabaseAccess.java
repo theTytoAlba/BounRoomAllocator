@@ -201,7 +201,61 @@ public class DatabaseAccess {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		usersLock.unlock();
+		roomsLock.unlock();
+		return result;
+	}
+	
+	public static JSONObject deleteRoom(JSONObject room) {
+		roomsLock.lock();
+		JSONObject result = new JSONObject();
+		String buildingName = "";
+		String roomName = "";
+		try {
+			buildingName = room.getString("buildingName");
+			roomName = room.getString("roomName");
+		} catch (JSONException e) {
+			System.out.println("Failed to resolve building JSON.");
+			try {
+				result.put("success", false);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			roomsLock.unlock();
+			return result;
+		}
+		
+		JSONObject database = DatabaseHelper.getDatabase(ROOMS_DATABASE);
+		try {
+			if (!database.has(buildingName)) {
+				result.put("success", false);
+				System.out.println("Building does not exists.");
+				roomsLock.unlock();
+				return result;
+			}
+			if (!database.getJSONObject(buildingName).has(roomName)) {
+				result.put("success", false);
+				System.out.println("Room doesnt exist in the building.");
+				roomsLock.unlock();
+				return result;
+			}
+			
+			database.getJSONObject(buildingName).remove(roomName);
+			DatabaseHelper.updateDatabase(ROOMS_DATABASE, database);
+			result.put("success", true);
+			result.put("roomName", roomName);
+			result.put("buildingName", buildingName);
+			roomsLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		roomsLock.unlock();
 		return result;
 	}
 }

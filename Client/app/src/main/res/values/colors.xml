@@ -8,4 +8,6 @@
     <color name="white">#FFFFFF</color>
     <color name="darkGray">#2d2d2d</color>
     <color name="midGray">#808080</color>
+    <color name="red">#e53935</color>
+    <color name="green">#8cc749</color>
 </resources>

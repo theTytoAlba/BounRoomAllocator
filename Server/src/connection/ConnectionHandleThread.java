@@ -154,6 +154,14 @@ public class ConnectionHandleThread extends Thread {
 				sendFailReply();
 			}
 			break;
+		case "deleteRoomConnection":
+			try {
+				sendReply(DatabaseAccess.deleteRoom(obj.getJSONObject("room")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to delete room object.");
+				sendFailReply();
+			}
+			break;
 		default:
 			break;
 		}
