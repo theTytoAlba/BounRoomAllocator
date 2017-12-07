@@ -339,12 +339,13 @@ public class DatabaseAccess {
 	            Iterator<?> roomIterator = roomsDatabase.getJSONObject(buildingName).keys();
 		        while (roomIterator.hasNext()) {
 		        		final String roomName = (String)roomIterator.next();
+		        		System.out.println("Room " + roomName);
 		        		int capacity = roomsDatabase.getJSONObject(buildingName).getJSONObject(roomName).getInt("capacity");
 		        		if (capacity >= requiredCapacity) {
 		        			if (!buildingIsIn) {
 		        				result.put(buildingName, new JSONObject());
+		        				buildingIsIn = true;
 		        			}
-		        			
 		        			result.getJSONObject(buildingName).put(roomName, capacity);
 		        		}
 		        }
