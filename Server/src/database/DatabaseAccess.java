@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class DatabaseAccess {
 	private static String USERS_DATABASE = "src/database/users.dat";
 	private static String ROOMS_DATABASE = "src/database/rooms.dat";
-	private static String WEEK_DATABASE = "src/database/rooms.dat";
+	private static String WEEK_DATABASE = "src/database/week.dat";
 	private static Lock usersLock = new ReentrantLock();
 	private static Lock roomsLock = new ReentrantLock();
 	private static Lock weekLock = new ReentrantLock();;
@@ -150,6 +150,28 @@ public class DatabaseAccess {
 			e.printStackTrace();
 		}
 		usersLock.unlock();
+		return result;
+	}
+	public static JSONObject getWeek () {
+		weekLock.lock();
+		JSONObject result = new JSONObject();
+		
+		JSONObject database = DatabaseHelper.getDatabase(WEEK_DATABASE);
+		try {
+			result.put("success", true);
+			result.put("week", database);
+			weekLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		weekLock.unlock();
 		return result;
 	}
 

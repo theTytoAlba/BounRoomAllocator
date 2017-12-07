@@ -146,6 +146,9 @@ public class ConnectionHandleThread extends Thread {
 		case "getRoomsConnection":
 			sendReply(DatabaseAccess.getRooms().toString());
 			break;
+		case "getWeekConnection":
+			sendReply(DatabaseAccess.getWeek().toString());
+			break;
 		case "addRoomConnection":
 			try {
 				sendReply(DatabaseAccess.addRoom(obj.getJSONObject("room")).toString());
