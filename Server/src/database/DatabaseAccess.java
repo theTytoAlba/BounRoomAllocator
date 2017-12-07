@@ -362,7 +362,7 @@ public class DatabaseAccess {
         			while (hourIterator.hasNext()) {
                 			String hour = (String)hourIterator.next();
                 			if (!details.getJSONObject("week").getJSONObject(weekDay).getBoolean(hour) || !weekDatabase.getJSONObject(weekDay).has(hour)) {
-                				System.out.println("skipping " + weekDay + hour);
+                			//	System.out.println("skipping " + weekDay + hour);
                     			continue;
                 			}
                 			System.out.println("Checking " + weekDay + hour);
@@ -371,11 +371,11 @@ public class DatabaseAccess {
                 			Iterator<?> occupiedBuildingIterator = occupied.keys();
                 			while (occupiedBuildingIterator.hasNext()) {
                         			String occupiedBuilding = (String)occupiedBuildingIterator.next();
-                        			System.out.println("Checking " + occupiedBuilding + weekDatabase.getJSONObject(weekDay).getJSONObject(hour).toString());
+                        	//		System.out.println("Checking " + occupiedBuilding + weekDatabase.getJSONObject(weekDay).getJSONObject(hour).toString());
                         			Iterator<?> occupiedRoomIterator = occupied.getJSONObject(occupiedBuilding).keys();
                         			while (occupiedRoomIterator.hasNext()) {
                         				String occupiedRoom = (String)occupiedRoomIterator.next();
-                            			System.out.println("Checking " + occupiedRoom);	
+                         //   			System.out.println("Checking " + occupiedRoom);	
                         				if (result.has(occupiedBuilding) && result.getJSONObject(occupiedBuilding).has(occupiedRoom)) {
                         					result.getJSONObject(occupiedBuilding).remove(occupiedRoom);
                         				}
@@ -392,8 +392,76 @@ public class DatabaseAccess {
 		}
 		
 		try {
+			JSONObject res = new JSONObject();
+			res.put("success", true);
+			res.put("rooms", result);
+			roomsLock.unlock();
+			weekLock.unlock();
+			return res;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		roomsLock.unlock();
+		weekLock.unlock();
+		return result;
+	}
+	
+
+	public static JSONObject addLecture(JSONObject details) {
+		weekLock.lock();
+		
+		JSONObject result = new JSONObject();
+		String buildingName = "";
+		String roomName = "";
+		String lectureName = "";
+		JSONObject week = new JSONObject();
+		
+		try {
+			buildingName = details.getString("buildingName");
+			roomName = details.getString("roomName");
+			lectureName = details.getString("lectureName");
+			week = details.getJSONObject("week");
+		} catch (JSONException e) {
+			System.out.println("Failed to resolve building JSON.");
+			try {
+				result.put("success", false);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			weekLock.unlock();
+			return result;
+		}
+		
+		JSONObject database = DatabaseHelper.getDatabase(WEEK_DATABASE);
+		try {
+			
+			Iterator<?> dayIterator = week.keys();
+            while (dayIterator.hasNext()) {
+                final String day = (String)dayIterator.next();
+                Iterator<?> hourIterator = week.getJSONObject(day).keys();
+                while (hourIterator.hasNext()) {
+                    final String hour = (String)hourIterator.next();
+                    //System.out.println(day + hour);
+                    if (week.getJSONObject(day).getBoolean(hour)) {
+	                    	if (!database.getJSONObject(day).has(hour)) {
+	                			database.getJSONObject(day).put(hour, new JSONObject());
+	                		}
+                    		if (!database.getJSONObject(day).getJSONObject(hour).has(buildingName)) {
+                    			database.getJSONObject(day).getJSONObject(hour).put(buildingName, new JSONObject());
+                    		}
+                    		database.getJSONObject(day).getJSONObject(hour).getJSONObject(buildingName).put(roomName, lectureName);
+                    		
+                    }
+                }
+            }
+			DatabaseHelper.updateDatabase(WEEK_DATABASE, database);
 			result.put("success", true);
-			roomsLock.lock();
 			weekLock.unlock();
 			return result;
 		} catch (JSONException e) {
@@ -405,7 +473,6 @@ public class DatabaseAccess {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		roomsLock.lock();
 		weekLock.unlock();
 		return result;
 	}

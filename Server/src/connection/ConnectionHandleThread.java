@@ -143,6 +143,14 @@ public class ConnectionHandleThread extends Thread {
 				sendFailReply();
 			}
 			break;
+		case "addLectureConnection":
+			try {
+				sendReply(DatabaseAccess.addLecture(obj.getJSONObject("details")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to get lecture object.");
+				sendFailReply();
+			}
+			break;
 		case "getRoomsConnection":
 			sendReply(DatabaseAccess.getRooms().toString());
 			break;

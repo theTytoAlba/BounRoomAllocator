@@ -1,6 +1,7 @@
 package com.thetytoalba.bounroomallocator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import static com.thetytoalba.bounroomallocator.Constants.TAG_ADD_ROOM_CONNECTIO
 import static com.thetytoalba.bounroomallocator.Constants.TAG_CONNECTION_TYPE;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_DETAILS;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_FRIDAY;
+import static com.thetytoalba.bounroomallocator.Constants.TAG_LECTURE_NAME;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_MONDAY;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOMS;
 import static com.thetytoalba.bounroomallocator.Constants.TAG_ROOM_CAPACITY;
@@ -126,6 +128,8 @@ public class AddLectureActivity extends AppCompatActivity {
     JSONObject week;
     ProgressBar progressBar;
     Button getAvailableRooms;
+    EditText lectureName;
+    EditText capacity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +138,8 @@ public class AddLectureActivity extends AppCompatActivity {
         initJSONWeek();
         initCalendarView();
 
-        final EditText lectureName = (EditText) findViewById(R.id.addLecture_lectureName);
-        final EditText capacity = (EditText) findViewById(R.id.addLecture_capacity);
+        lectureName = (EditText) findViewById(R.id.addLecture_lectureName);
+        capacity = (EditText) findViewById(R.id.addLecture_capacity);
         progressBar = (ProgressBar) findViewById(R.id.addLecture_progress);
         getAvailableRooms = (Button) findViewById(R.id.getAvailableRooms);
         getAvailableRooms.setOnClickListener(new View.OnClickListener() {
@@ -428,6 +432,12 @@ public class AddLectureActivity extends AppCompatActivity {
     private void successfulGetAvailable(JSONObject rooms) {
         hideProgress();
         Log.i("AddLectureActivity", rooms.toString());
+        Intent intent = new Intent(AddLectureActivity.this, SelectRoomActivity.class);
+        intent.putExtra(TAG_ROOMS, rooms.toString());
+        intent.putExtra(TAG_LECTURE_NAME, lectureName.getText().toString());
+        intent.putExtra(TAG_WEEK, week.toString());
+        startActivity(intent);
+        finish();
     }
 
     private void failedGetAvailable() {

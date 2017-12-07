@@ -19,6 +19,7 @@ class Constants {
     static String TAG_GET_ROOMS_CONNECTION = "getRoomsConnection";
     static String TAG_GET_WEEK_CONNECTION = "getWeekConnection";
     static String TAG_GET_AVAILABLE_ROOMS_CONNECTION = "getAvailableRoomsConnection";
+    static String TAG_ADD_LECTURE_CONNECTION = "addLectureConnection";
 
     // Return tags
     static String TAG_SUCCESS = "success";
@@ -48,4 +49,5 @@ class Constants {
     static String TAG_SATURDAY = "Saturday";
     static String TAG_SUNDAY = "Sunday";
     static String TAG_DETAILS = "details";
+    static String TAG_LECTURE_NAME = "lectureName";
 }
