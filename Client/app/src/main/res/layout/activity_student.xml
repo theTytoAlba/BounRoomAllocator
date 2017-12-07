@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thetytoalba.bounroomallocator.StudentActivity">
-
-</android.support.constraint.ConstraintLayout>
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:text="@string/Welcome"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimaryDark"/>
+        <ProgressBar
+            android:id="@+id/studentActivity_progress"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/studentActivity_refreshIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/refresh_icon"
+            android:background="@color/colorAccentLight"
+            android:tint="@color/white"/>
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <Button
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="@string/addLecture"/>
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <Button
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="@string/addLecture"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:id="@+id/studentActivity_buildingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </ScrollView>
+</LinearLayout>

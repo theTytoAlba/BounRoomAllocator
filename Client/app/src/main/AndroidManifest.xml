@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".RoomCalendarActivity">
         </activity>
+        <activity android:name=".AddLectureActivity">
+        </activity>
     </application>
 
 </manifest>

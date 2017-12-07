@@ -11,6 +11,7 @@ import android.support.v7.content.res.AppCompatResources;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -129,10 +130,18 @@ public class TeacherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
-        Log.i("ManagerActivity", "Started app in manager mode.");
+        Log.i("TeacherActivity", "Started app in teacher mode.");
 
         progressBar = (ProgressBar) findViewById(R.id.teacherActivity_progress);
         refreshIcon = (ImageView) findViewById(R.id.teacherActivity_refreshIcon);
+
+        Button addLecture = (Button) findViewById(R.id.teacherActivity_addLectureButton);
+        addLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TeacherActivity.this, AddLectureActivity.class));
+            }
+        });
 
         refreshIcon.setOnClickListener(new View.OnClickListener() {
             @Override
