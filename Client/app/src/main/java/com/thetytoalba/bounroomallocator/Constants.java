@@ -18,6 +18,7 @@ class Constants {
     static String TAG_DELETE_ROOM_CONNECTION = "deleteRoomConnection";
     static String TAG_GET_ROOMS_CONNECTION = "getRoomsConnection";
     static String TAG_GET_WEEK_CONNECTION = "getWeekConnection";
+    static String TAG_GET_AVAILABLE_ROOMS_CONNECTION = "getAvailableRoomsConnection";
 
     // Return tags
     static String TAG_SUCCESS = "success";
@@ -46,4 +47,5 @@ class Constants {
     static String TAG_FRIDAY = "Friday";
     static String TAG_SATURDAY = "Saturday";
     static String TAG_SUNDAY = "Sunday";
+    static String TAG_DETAILS = "details";
 }

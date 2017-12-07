@@ -1,4 +1,5 @@
 package database;
+import java.util.Iterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -149,7 +150,7 @@ public class DatabaseAccess {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		usersLock.unlock();
+		roomsLock.unlock();
 		return result;
 	}
 	public static JSONObject getWeek () {
@@ -313,4 +314,100 @@ public class DatabaseAccess {
 		return result;
 	}
 
+	public static JSONObject getAvailableRooms(JSONObject details) {
+		weekLock.lock();
+		roomsLock.lock();
+		
+		int requiredCapacity = 0;
+		try {
+			requiredCapacity = details.getInt("roomCapacity");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		JSONObject result = new JSONObject();
+		
+		// Filter rooms by capacity.
+		JSONObject roomsDatabase = DatabaseHelper.getDatabase(ROOMS_DATABASE);
+		JSONObject weekDatabase = DatabaseHelper.getDatabase(WEEK_DATABASE);
+		
+		try {
+			Iterator<?> buildingIterator = roomsDatabase.keys();
+	        while (buildingIterator.hasNext()) {
+	        		boolean buildingIsIn = false;
+	            final String buildingName = (String)buildingIterator.next();
+	            Iterator<?> roomIterator = roomsDatabase.getJSONObject(buildingName).keys();
+		        while (roomIterator.hasNext()) {
+		        		final String roomName = (String)roomIterator.next();
+		        		int capacity = roomsDatabase.getJSONObject(buildingName).getJSONObject(roomName).getInt("capacity");
+		        		if (capacity >= requiredCapacity) {
+		        			if (!buildingIsIn) {
+		        				result.put(buildingName, new JSONObject());
+		        			}
+		        			
+		        			result.getJSONObject(buildingName).put(roomName, capacity);
+		        		}
+		        }
+	        }
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		// Filter rooms by availability
+		try {
+			Iterator<?> weekDayIterator = details.getJSONObject("week").keys();
+			while (weekDayIterator.hasNext()) {
+        			String weekDay = (String)weekDayIterator.next();
+        			Iterator<?> hourIterator = details.getJSONObject("week").getJSONObject(weekDay).keys();
+        			while (hourIterator.hasNext()) {
+                			String hour = (String)hourIterator.next();
+                			if (!details.getJSONObject("week").getJSONObject(weekDay).getBoolean(hour) || !weekDatabase.getJSONObject(weekDay).has(hour)) {
+                				System.out.println("skipping " + weekDay + hour);
+                    			continue;
+                			}
+                			System.out.println("Checking " + weekDay + hour);
+                			// This day/hour is needed and exists in database.
+                			JSONObject occupied = weekDatabase.getJSONObject(weekDay).getJSONObject(hour);
+                			Iterator<?> occupiedBuildingIterator = occupied.keys();
+                			while (occupiedBuildingIterator.hasNext()) {
+                        			String occupiedBuilding = (String)occupiedBuildingIterator.next();
+                        			System.out.println("Checking " + occupiedBuilding + weekDatabase.getJSONObject(weekDay).getJSONObject(hour).toString());
+                        			Iterator<?> occupiedRoomIterator = occupied.getJSONObject(occupiedBuilding).keys();
+                        			while (occupiedRoomIterator.hasNext()) {
+                        				String occupiedRoom = (String)occupiedRoomIterator.next();
+                            			System.out.println("Checking " + occupiedRoom);	
+                        				if (result.has(occupiedBuilding) && result.getJSONObject(occupiedBuilding).has(occupiedRoom)) {
+                        					result.getJSONObject(occupiedBuilding).remove(occupiedRoom);
+                        				}
+                        			}
+                        			if (result.has(occupiedBuilding) && result.getJSONObject(occupiedBuilding).length() == 0) {
+                        				result.remove(occupiedBuilding);
+                        			}
+                			}
+        			}
+			}
+			System.out.println("saglam");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", true);
+			roomsLock.lock();
+			weekLock.unlock();
+			return result;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result.put("success", false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		roomsLock.lock();
+		weekLock.unlock();
+		return result;
+	}
+	
 }

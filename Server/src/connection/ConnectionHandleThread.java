@@ -173,6 +173,14 @@ public class ConnectionHandleThread extends Thread {
 				sendFailReply();
 			}
 			break;
+		case "getAvailableRoomsConnection":
+			try {
+				sendReply(DatabaseAccess.getAvailableRooms(obj.getJSONObject("details")).toString());
+			} catch (JSONException e) {
+				System.out.println("Failed to get building object.");
+				sendFailReply();
+			}
+			break;
 		default:
 			break;
 		}
