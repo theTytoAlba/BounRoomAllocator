@@ -29,26 +29,6 @@
             android:src="@drawable/refresh_icon"
             android:background="@color/colorAccentLight"
             android:tint="@color/white"/>
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
-        <Button
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:text="@string/addLecture"/>
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
-        <Button
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:text="@string/addLecture"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

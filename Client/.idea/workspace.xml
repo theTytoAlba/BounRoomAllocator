@@ -11,15 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0f2e5bb-4e35-4b03-91ec-88c630e50d24" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/SelectRoomActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_select_room.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/AddLectureActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/AddLectureActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/src/connection/ConnectionHandleThread.java" afterPath="$PROJECT_DIR$/../Server/src/connection/ConnectionHandleThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/src/database/DatabaseAccess.java" afterPath="$PROJECT_DIR$/../Server/src/database/DatabaseAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/src/database/week.dat" afterPath="$PROJECT_DIR$/../Server/src/database/week.dat" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,18 +66,55 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="60" column="44" lean-forward="false" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+            <state relative-caret-position="320">
+              <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectRoomActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StudentActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/StudentActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1549">
+              <caret line="193" column="35" lean-forward="true" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeacherActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="184" column="17" lean-forward="false" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_teacher.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectRoomActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/SelectRoomActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="174" column="32" lean-forward="false" selection-start-line="174" selection-start-column="32" selection-end-line="174" selection-end-column="32" />
+            <state relative-caret-position="193">
+              <caret line="179" column="38" lean-forward="false" selection-start-line="179" selection-start-column="38" selection-end-line="179" selection-end-column="38" />
               <folding>
                 <element signature="e#4911#5776#0" expanded="true" />
                 <element signature="e#5775#5776#0" expanded="true" />
@@ -102,35 +133,6 @@
                 <element signature="method#initJSONWeek#0;class#AddLectureActivity#0" expanded="false" />
                 <element signature="method#getJSONDay#0;class#AddLectureActivity#0" expanded="false" />
                 <element signature="method#initCalendarView#0;class#AddLectureActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoomCalendarActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/RoomCalendarActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="67" column="21" lean-forward="false" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
-              <folding>
-                <element signature="method#initDay#0;class#RoomCalendarActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ManagerActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/ManagerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="38" lean-forward="false" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-              <folding>
-                <element signature="class#GetRoomsTask#0;class#ManagerActivity#0" expanded="false" />
-                <element signature="method#doInBackground#0;class#GetRoomsTask#0;class#ManagerActivity#0" expanded="false" />
-                <element signature="method#onPostExecute#0;class#GetRoomsTask#0;class#ManagerActivity#0" expanded="false" />
-                <element signature="class#DeleteRoomTask#0;class#ManagerActivity#0" expanded="false" />
-                <element signature="e#15422#16136#0" expanded="true" />
-                <element signature="e#16135#16136#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,7 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>style</find>
       <find>set</find>
       <find>sign</find>
       <find>userType</find>
@@ -200,6 +201,7 @@
       <find>selectrooma</find>
       <find>selectroomac</find>
       <find>buildingName</find>
+      <find>add</find>
     </findStrings>
     <replaceStrings>
       <replace>messageToSend</replace>
@@ -1942,9 +1944,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_day_continer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_room_calendar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/StudentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/RoomCalendarActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_lecture.xml" />
@@ -1952,6 +1952,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/SelectRoomActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/AddLectureActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml" />
       </list>
     </option>
   </component>
@@ -2185,7 +2187,7 @@
     <property name="device.picker.selection" value="ENU7N16328001252" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="FullScreen" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="calen&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/RoomCalendarActivity.java&#10;tea&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java&#10;ma&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/layout/activity_manager.xml&#10;strin&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/values/strings.xml&#10;sign&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/layout/activity_sign_up.xml&#10;login&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/LoginActivity.java&#10;colo&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/values/colors.xml" />
+    <property name="SearchEverywhereHistoryKey" value="teac&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/layout/activity_teacher.xml&#10;tea&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java&#10;calen&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/RoomCalendarActivity.java&#10;ma&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/layout/activity_manager.xml&#10;strin&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/values/strings.xml&#10;sign&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/layout/activity_sign_up.xml&#10;login&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/java/com/thetytoalba/bounroomallocator/LoginActivity.java&#10;colo&#9;FILE&#9;file:///Users/vivian/Documents/BounRoomAllocator/Client/app/src/main/res/values/colors.xml" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -2281,7 +2283,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620404977" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620591265" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2329,7 +2331,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620404977" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620591265" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2512,7 +2514,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620404978" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512620591266" />
       </method>
     </configuration>
     <list size="1">
@@ -2571,7 +2573,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2609047" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2609047" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2698145" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2816189" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2935,35 +2937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="36" column="61" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="61" />
-          <folding>
-            <element signature="e#581#598#0" expanded="true" />
-            <element signature="e#1688#1708#0" expanded="true" />
-            <element signature="e#2144#2164#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="184" column="17" lean-forward="false" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5192#5402#0" expanded="true" />
-            <element signature="e#5401#5402#0" expanded="true" />
-            <element signature="e#8162#8634#0" expanded="true" />
-            <element signature="e#8633#8634#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_day_continer.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3069,27 +3042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/StudentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="164" column="49" lean-forward="false" selection-start-line="164" selection-start-column="37" selection-end-line="164" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="60" column="44" lean-forward="false" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/AddLectureActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -3105,12 +3057,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/SelectRoomActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="174" column="32" lean-forward="false" selection-start-line="174" selection-start-column="32" selection-end-line="174" selection-end-column="32" />
+        <state relative-caret-position="193">
+          <caret line="179" column="38" lean-forward="false" selection-start-line="179" selection-start-column="38" selection-end-line="179" selection-end-column="38" />
           <folding>
             <element signature="e#4911#5776#0" expanded="true" />
             <element signature="e#5775#5776#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/StudentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1549">
+          <caret line="193" column="35" lean-forward="true" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/thetytoalba/bounroomallocator/TeacherActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="184" column="17" lean-forward="false" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_teacher.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
